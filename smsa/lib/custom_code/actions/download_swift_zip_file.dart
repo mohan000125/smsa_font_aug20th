@@ -74,7 +74,6 @@ Future downloadSwiftZipFile(
       "inpOut": FFAppState().identifiersDownload,
       "fileName": [],
       "mtCode": [],
-      "time": [],
       "transactionRef": [],
       "fileType": FFAppState().fileTypeDownload,
       "msgType": []

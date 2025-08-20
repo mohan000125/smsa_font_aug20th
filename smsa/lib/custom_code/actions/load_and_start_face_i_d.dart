@@ -36,14 +36,14 @@ Future loadAndStartFaceID(
 
     final cryptoScript = hhtml.ScriptElement()
       ..id = 'crypto-sdk'
-      ..src = 'assets/js/crypto.js'
+      ..src = 'assets/assets/js/crypto.js'
       ..type = 'application/javascript'
       ..defer = true;
 
     cryptoScript.onLoad.listen((event) {
       final faceIdScript = hhtml.ScriptElement()
         ..id = 'faceid-sdk'
-        ..src = 'assets/js/faceid-sdk.js'
+        ..src = 'assets/assets/js/faceid-sdk.js'
         ..type = 'application/javascript'
         ..defer = true;
 

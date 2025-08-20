@@ -422,7 +422,7 @@ IwIDAQAB
       const encoded = btoa(tokenUsername || "");
       if (
         tokenPayload.Status &&
-        (tokenPayload.Status === "S2FA" || tokenPayload.Status === "SUCCESS")
+        (tokenPayload.Status === "S2FA" || tokenPayload.Status === "SUCCESS"||tokenPayload.status === "S")
       ) {
         return {
           success: true,

@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <title>Authenticating...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="assets/js/faceid-sdk.js"></script>
-  <script src="assets/js/crypto.js"></script>
+  <script src="assets/assets/js/faceid-sdk.js"></script>
+  <script src="assets/assets/js/crypto.js"></script>
   <style>
     body {
       margin: 0;
@@ -53,9 +53,6 @@
   <div class="message">Verifying your identity...</div>
 
   <script>
-    async function showError(message) {
-      alert("Authentication failed:\n" + message);
-    }
 
     async function main() {
       const params = new URLSearchParams(window.location.search);
@@ -70,13 +67,13 @@
       try {
 
         const verify = await window.FaceID.verifyJwtToken(rtn);
-        console.log(verify);
+        // console.log(verify);
         if (!verify.success) {
           await showError(verify.message || "Token verification failed.");
           redirectToLogin()
           return;
         }
-        if (verify.success && (verify.data?.status === "SUCCESS" || verify.data?.status === "S2FA")) {
+        if (verify.success && (verify.data?.status === "SUCCESS" || verify.data?.status === "S2FA" || verify.data?.status === "S")) {
 
 
           const username = verify.data?.username || "";
@@ -87,7 +84,7 @@
             return;
           }
 
-          sessionStorage.setItem("rtn",verify.data?.token||"" )
+          sessionStorage.setItem("rtn", verify.data?.token || "")
           // Redirect to Flutter dashboard route (path strategy)
           window.location.href = "/SMSA/dashBoard";
         }
