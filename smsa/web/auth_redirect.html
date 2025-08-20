@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Authenticating...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/js/faceid-sdk.js"></script>
+  <script src="assets/js/crypto.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ff6600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+      flex-direction: column;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .message {
+      font-size: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="spinner"></div>
+  <div class="message">Verifying your identity...</div>
+
+  <script>
+    async function showError(message) {
+      alert("Authentication failed:\n" + message);
+    }
+
+    async function main() {
+      const params = new URLSearchParams(window.location.search);
+      const rtn = params.get('rtn');
+
+      if (!rtn) {
+        await showError("Missing token.");
+        redirectToLogin()
+        return;
+      }
+
+      try {
+
+        const verify = await window.FaceID.verifyJwtToken(rtn);
+        console.log(verify);
+        if (!verify.success) {
+          await showError(verify.message || "Token verification failed.");
+          redirectToLogin()
+          return;
+        }
+        if (verify.success && (verify.data?.status === "SUCCESS" || verify.data?.status === "S2FA")) {
+
+
+          const username = verify.data?.username || "";
+          if (!username || username.trim() === "") {
+            await showError(verify.message || "authentication failed.");
+
+            redirectToLogin();
+            return;
+          }
+
+          sessionStorage.setItem("rtn",verify.data?.token||"" )
+          // Redirect to Flutter dashboard route (path strategy)
+          window.location.href = "/SMSA/dashBoard";
+        }
+      } catch (err) {
+        console.error(err);
+        await showError("Unexpected error: " + err);
+        redirectToLogin()
+      }
+    }
+    function redirectToLogin() {
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = "/SMSA/";
+    }
+    main();
+  </script>
+</body>
+
+</html>

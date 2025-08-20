@@ -1,0 +1,14 @@
+{
+  "applicationId": "15000000010454",
+"applicationName": "SMSA",
+"applicationSecret": "",
+"initializeFaceIDURL": "https://pi-control-adapter-route-dimfa-fips-uat.apps.mfaocpcorpuat.icicibankltd.com/pi-control-adapter/",
+"validateFaceIDURL": "https://pi-control-adapter-route-dimfa-fips-uat.apps.mfaocpcorpuat.icicibankltd.com/pi-control-adapter/",
+"srURL": "https://icmsuat.icicibank.com/SMSA/auth_redirect.html",
+"erURL": "https://icmsuat.icicibank.com/SMSA/",
+"dimfaRegisterUrl": "https://pi-control-adapter-route-dimfa-fips-uat.apps.mfaocpcorpuat.icicibankltd.com",
+"dimfaAuthUrl": "https://mwuat.icicibankltd.com/pi-control-adapter-v2/v4/users",
+"dimfaRedirectUrl": "https://icmsuat.icicibank.com/SMSA/",
+"apiKey": "mcl6Aov7fz41veXi5zHaehuouFfTjVFfjtdNGAShmsjVRTMy",
+"apiBaseURL": "https://icmsuat.icicibank.com"
+}
